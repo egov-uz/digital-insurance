@@ -1,0 +1,28 @@
+[book]
+title        = "#title#"
+authors      = ["#author#"]
+src          = "src"
+language     = "en"
+multilingual = false
+
+[output.html]
+preferred-dark-theme = "ayu"
+default-theme        = "light"
+cname                = "#website#"
+edit-url-template    = "#github#/edit/main/{path}"
+git-repository-url   = "#github#/tree/main/"
+mathjax-support      = true
+smart-punctuation    = true
+
+[output.html.playground]
+editable     = true
+line-numbers = true
+
+[output.html.search]
+boost-hierarchy     = 2
+boost-paragraph     = 1
+boost-title         = 2
+expand              = true
+heading-split-level = 2
+limit-results       = 20
+use-boolean-and     = true

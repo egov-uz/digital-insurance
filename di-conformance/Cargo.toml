@@ -1,0 +1,22 @@
+[package]
+name = "#name#"
+version = "#version#"
+edition = "2021"
+license = "MIT"
+homepage = "#website#"
+repository = "#repository#"
+description = "#description#"
+authors = ["#author#"]
+
+# Dependencies that will included with final binary
+[dependencies]
+
+# Development dependencies which aren't used in release binary
+[dev-dependencies]
+
+# Optimize release binary as much as possible
+[profile.release]
+strip = true
+opt-level = "z"
+lto = true
+codegen-units = 1
