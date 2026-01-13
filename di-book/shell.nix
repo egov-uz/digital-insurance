@@ -1,32 +1,23 @@
-{
-  pkgs ? let
-    lock = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked;
-    nixpkgs = fetchTarball {
-      url = "https://github.com/nixos/nixpkgs/archive/${lock.rev}.tar.gz";
-      sha256 = lock.narHash;
-    };
-  in
-    import nixpkgs {overlays = [];},
-  ...
-}: let
-  # Manifest via Cargo.toml
-  manifest = (pkgs.lib.importTOML ./book.toml).book;
+flake: {pkgs, ...}: let
+  # Hostplatform system
+  system = pkgs.hostPlatform.system;
+
+  # Production package
+  base = flake.packages.${system}.default;
 in
-  pkgs.stdenv.mkDerivation {
-    name = "${manifest.title}-shell";
+  pkgs.mkShell {
+    inputsFrom = [base];
 
-    nativeBuildInputs = with pkgs; [
-      # Utilities
-      git
-      mdbook
-
-      # Toml
-      taplo
-
-      # Nix
+    packages = with pkgs; [
       nixd
       statix
       deadnix
       alejandra
+
+      taplo
     ];
+
+    shellHook = ''
+      # Extra steps to do while activating development shell
+    '';
   }

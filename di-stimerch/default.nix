@@ -6,10 +6,10 @@
 in rec {
   # Used by `nix build ...`
   packages = {
-    di-core = pkgs.callPackage ./package.nix {inherit pkgs;};
+    di-stimerch = pkgs.callPackage ./package.nix {inherit pkgs;};
   };
   # Used by `nix develop ...`
   devShells = {
-    di-core = import ./shell.nix packages.di-core {inherit pkgs;};
+    di-stimerch = import ./shell.nix packages.di-stimerch {inherit pkgs;};
   };
 }
