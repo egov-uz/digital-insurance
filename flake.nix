@@ -23,9 +23,8 @@
         pkgs,
         system,
         ...
-      }: rec {
-        # Nix script formatter
-        formatter = pkgs.alejandra;
+      }: let
+        merge = import ./merge.nix {inherit pkgs;};
 
         # Repositories of monorepo
         projects = {
@@ -34,20 +33,24 @@
           di-stimerch = import ./di-stimerch {inherit inputs system;};
           di-conformance = import ./di-conformance {inherit inputs system;};
         };
-
-        # Development environment
-        devShells = {
-          default = import ./shell.nix {inherit pkgs;};
-        };
+      in rec {
+        # Nix script formatter
+        formatter = pkgs.alejandra;
 
         # Output package
         packages = with projects;
-          di-book // di-core // di-stimerch // di-conformance;
+          di-book.packages
+          // di-core.packages
+          // di-stimerch.packages
+          // di-conformance.packages;
 
-        # Unified devShells
-        devShell =
-          (import ./merge.nix {inherit pkgs;})
-          (pkgs.lib.attrsets.attrValues devShells);
+        # Development environment
+        devShells = with projects;
+          {default = merge devShells;}
+          // di-book.devShells
+          // di-core.devShells
+          // di-stimerch.devShells
+          // di-conformance.devShells;
       };
     });
 }

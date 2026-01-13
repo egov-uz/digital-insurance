@@ -2,6 +2,7 @@
   inputs,
   system,
 }: let
+  # Packages
   pkgs = inputs.nixpkgs.legacyPackages.${system};
 in rec {
   # Used by `nix build ...`

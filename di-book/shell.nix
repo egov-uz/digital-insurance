@@ -1,23 +1,17 @@
-flake: {pkgs, ...}: let
-  # Hostplatform system
-  system = pkgs.hostPlatform.system;
+package: {pkgs, ...}:
+pkgs.mkShell {
+  inputsFrom = [package];
 
-  # Production package
-  base = flake.packages.${system}.default;
-in
-  pkgs.mkShell {
-    inputsFrom = [base];
+  packages = with pkgs; [
+    nixd
+    statix
+    deadnix
+    alejandra
 
-    packages = with pkgs; [
-      nixd
-      statix
-      deadnix
-      alejandra
+    taplo
+  ];
 
-      taplo
-    ];
-
-    shellHook = ''
-      # Extra steps to do while activating development shell
-    '';
-  }
+  shellHook = ''
+    # Extra steps to do while activating development shell
+  '';
+}
