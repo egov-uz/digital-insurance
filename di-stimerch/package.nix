@@ -38,13 +38,15 @@ in
 
     # Compile time dependencies
     nativeBuildInputs = with pkgs; [
-      # Other compile time dependencies
+      pkg-config
       postgresql
+      openssl
     ];
 
     # Runtime dependencies which will be shipped
     # with nix package
     buildInputs = with pkgs; [
+      postgresql
       openssl
       # libressl
     ];
