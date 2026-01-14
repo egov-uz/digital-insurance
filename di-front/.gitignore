@@ -1,0 +1,11 @@
+# Rust
+/target
+
+# Trunk
+/dist
+
+# Nix
+/result
+
+# Direnv
+.direnv

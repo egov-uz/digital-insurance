@@ -1,0 +1,26 @@
+[package]
+name = "di-front"
+version = "0.0.1"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Frontend website for managing"
+homepage = "https://egov.uz"
+repository = "https://github.com/egov-uz/digital-insurance"
+authors = ["Sokhibjon Orzikulov <sakhib@orzklv.uz>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bounce = "0.9.0"
+chrono = { version = "0.4.42", features = ["serde"] }
+gloo = "0.11.0"
+reqwasm = "0.5.0"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+validator = { version = "0.20.0", features = ["derive"] }
+wasm-bindgen = "0.2.106"
+wasm-bindgen-futures = "0.4.56"
+web-sys = { version = "0.3.83", features = ["HtmlInputElement", "Window"] }
+yew = { version = "0.22.0", features = ["csr"] }
+yew-router = "0.19.0"
+yewdux = { git = "https://github.com/intendednull/yewdux.git" }

@@ -45,8 +45,9 @@
         projects = {
           di-book = import ./di-book {inherit inputs system;};
           di-core = import ./di-core {inherit inputs system;};
+          di-cnfm = import ./di-cnfm {inherit inputs system;};
+          di-front = import ./di-front {inherit inputs system;};
           di-stimerch = import ./di-stimerch {inherit inputs system;};
-          di-conformance = import ./di-conformance {inherit inputs system;};
         };
       in rec {
         # Nix script formatter
@@ -56,8 +57,9 @@
         packages = with projects;
           di-book.packages
           // di-core.packages
-          // di-stimerch.packages
-          // di-conformance.packages;
+          // di-cnfm.packages
+          // di-front.packages
+          // di-stimerch.packages;
 
         # Development environment
         devShells = with projects;
@@ -67,8 +69,9 @@
           }
           // di-book.devShells
           // di-core.devShells
-          // di-stimerch.devShells
-          // di-conformance.devShells;
+          // di-cnfm.devShells
+          // di-front.devShells
+          // di-stimerch.devShells;
       };
     });
 }

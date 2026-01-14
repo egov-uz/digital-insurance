@@ -10,7 +10,7 @@
   ...
 }: let
   lib = pkgs.lib;
-  manifest = (pkgs.lib.importTOML ./Cargo.toml).workspace.package;
+  manifest = (pkgs.lib.importTOML ./Cargo.toml).package;
 in
   pkgs.rustPlatform.buildRustPackage {
     pname = manifest.name;
@@ -22,19 +22,22 @@ in
     };
 
     nativeBuildInputs = with pkgs; [
-      pkg-config
-      postgresql
-      openssl
+      binaryen
+      llvmPackages.bintools-unwrapped
+      tailwindcss_4
+      trunk
+      # needs to match with wasm-bindgen version in upstreams Cargo.lock
+      wasm-bindgen-cli_0_2_93
     ];
 
-    buildInputs = with pkgs; [
-      postgresql
-      openssl
-    ];
+    buildPhase = ''
+      trunk build --offline --frozen --release
+    '';
 
-    fixupPhase = ''
-      mkdir -p $out/mgrs
-      cp -R ./crates/database/* $out/mgrs
+    installPhase = ''
+      cd dist
+      mkdir -p $out
+      mv * $out
     '';
 
     meta = with lib; {
@@ -42,7 +45,6 @@ in
       description = manifest.description;
       license = with licenses; [cc0];
       platforms = with platforms; linux ++ darwin;
-      mainProgram = "server";
       maintainers = with maintainers; [orzklv];
     };
   }

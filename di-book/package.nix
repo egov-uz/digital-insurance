@@ -9,20 +9,14 @@
     import nixpkgs {overlays = [];},
   ...
 }: let
-  # Helpful nix function
   lib = pkgs.lib;
-
-  # Manifest via Cargo.toml
   manifest = (pkgs.lib.importTOML ./book.toml).book;
 in
   pkgs.stdenv.mkDerivation {
     pname = manifest.title;
     version = "0.0.1";
-
-    # Website contents
     src = pkgs.lib.cleanSource ./.;
 
-    # Compile time dependencies
     nativeBuildInputs = with pkgs; [
       mdbook
     ];
@@ -39,9 +33,8 @@ in
     meta = with lib; {
       homepage = manifest.website;
       description = "${manifest.title} documentation website generated with mdBook";
-      # https://github.com/NixOS/nixpkgs/blob/master/lib/licenses.nix
-      license = with lib.licenses; [mit];
+      license = with licenses; [cc0];
       platforms = with platforms; linux ++ darwin;
-      maintainers = [lib.maintainers.orzklv];
+      maintainers = with maintainers; [orzklv];
     };
   }

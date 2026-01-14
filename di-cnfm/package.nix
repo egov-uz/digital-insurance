@@ -53,16 +53,6 @@ in
       # libressl
     ];
 
-    # Set Environment Variables
-    RUST_BACKTRACE = 1;
-    RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
-
-    # => Use this only if you know what you're doing, else remove!
-    # NIX_LDFLAGS = "-L${(getLibFolder pkgs.libiconv)}";
-    # LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-    #   pkgs.libiconv
-    # ];
-
     meta = with lib; {
       homepage = manifest.homepage;
       description = manifest.description;
