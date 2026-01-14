@@ -12,6 +12,11 @@ jobs:
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            experimental-features = nix-command flakes pipe-operators
+            extra-substituters = https://cache.xinux.uz/
+            extra-trusted-public-keys = cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0=
 
       - name: Check up flake configuration
         run: nix flake check --all-systems --show-trace
@@ -25,6 +30,11 @@ jobs:
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            experimental-features = nix-command flakes pipe-operators
+            extra-substituters = https://cache.xinux.uz/
+            extra-trusted-public-keys = cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0=
 
       - name: Build project with Nix
         run: nix flake show --json | jq  '.packages."x86_64-linux"|keys[]' | xargs -I {} nix build .#{}
