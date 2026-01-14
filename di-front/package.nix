@@ -19,6 +19,9 @@ in
 
     cargoLock = {
       lockFile = ./Cargo.lock;
+      outputHashes = {
+        "yewdux-0.11.0" = "sha256-50IlwzzFiZF9nDApLLuG6nSLdAFrHKgWCHVXIvwyRsg=";
+      };
     };
 
     nativeBuildInputs = with pkgs; [
@@ -27,7 +30,7 @@ in
       tailwindcss_4
       trunk
       # needs to match with wasm-bindgen version in upstreams Cargo.lock
-      wasm-bindgen-cli_0_2_93
+      wasm-bindgen-cli_0_2_106
     ];
 
     buildPhase = ''
