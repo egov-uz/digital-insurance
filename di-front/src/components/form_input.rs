@@ -29,7 +29,7 @@ pub fn form_input_component(props: &Props) -> Html {
         Some(error) => error,
         None => &empty_errors,
     };
-    let error_message = match error.get(0) {
+    let error_message = match error.first() {
         Some(message) => message.to_string(),
         None => "".to_string(),
     };

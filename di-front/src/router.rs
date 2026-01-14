@@ -9,20 +9,20 @@ use crate::pages::{
 #[derive(Clone, Routable, PartialEq)]
 pub enum Route {
     #[at("/")]
-    HomePage,
+    Home,
     #[at("/register")]
-    RegisterPage,
+    Register,
     #[at("/login")]
-    LoginPage,
+    Login,
     #[at("/profile")]
-    ProfilePage,
+    Profile,
 }
 
 pub fn switch(routes: Route) -> Html {
     match routes {
-        Route::HomePage => html! {<HomePage/> },
-        Route::RegisterPage => html! {<RegisterPage/> },
-        Route::LoginPage => html! {<LoginPage/> },
-        Route::ProfilePage => html! {<ProfilePage/> },
+        Route::Home => html! {<HomePage/> },
+        Route::Register => html! {<RegisterPage/> },
+        Route::Login => html! {<LoginPage/> },
+        Route::Profile => html! {<ProfilePage/> },
     }
 }

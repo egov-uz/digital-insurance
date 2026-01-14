@@ -23,4 +23,4 @@ wasm-bindgen-futures = "0.4.56"
 web-sys = { version = "0.3.83", features = ["HtmlInputElement", "Window"] }
 yew = { version = "0.22.0", features = ["csr"] }
 yew-router = "0.19.0"
-yewdux = { git = "https://github.com/intendednull/yewdux.git" }
+yewdux = { git = "https://github.com/orzklv/yewdux.git" }

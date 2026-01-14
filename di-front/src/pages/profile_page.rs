@@ -27,7 +27,7 @@ pub fn profile_page() -> Html {
                 Err(e) => {
                     set_page_loading(false, dispatch.clone());
                     set_show_alert(e.to_string(), dispatch);
-                    navigator.push(&router::Route::LoginPage);
+                    navigator.push(&router::Route::Login);
                 }
             }
         });

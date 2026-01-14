@@ -54,7 +54,7 @@ fn get_input_callback(
 #[function_component(RegisterPage)]
 pub fn register_page() -> Html {
     let (store, dispatch) = use_store::<Store>();
-    let form = use_state(|| RegisterUserSchema::default());
+    let form = use_state(RegisterUserSchema::default);
     let validation_errors = use_state(|| Rc::new(RefCell::new(ValidationErrors::new())));
     let navigator = use_navigator().unwrap();
 
@@ -155,7 +155,7 @@ pub fn register_page() -> Html {
                                     "Account registered successfully".to_string(),
                                     dispatch,
                                 );
-                                navigator.push(&router::Route::LoginPage);
+                                navigator.push(&router::Route::Login);
                             }
                             Err(e) => {
                                 set_page_loading(false, dispatch.clone());
@@ -198,7 +198,7 @@ pub fn register_page() -> Html {
             />
             <span class="block">
               {"Already have an account?"} {" "}
-            <Link<Route> to={Route::LoginPage} classes="text-ct-blue-600">{"Login Here"}</Link<Route>>
+            <Link<Route> to={Route::Login} classes="text-ct-blue-600">{"Login Here"}</Link<Route>>
             </span>
             <LoadingButton
               loading={store.page_loading}

@@ -29,7 +29,7 @@ pub fn header_component() -> Html {
                         set_page_loading(false, dispatch.clone());
                         set_auth_user(None, dispatch.clone());
                         set_show_alert("Logged out successfully".to_string(), dispatch);
-                        navigator.push(&router::Route::LoginPage);
+                        navigator.push(&router::Route::Login);
                     }
                     Err(e) => {
                         set_show_alert(e.to_string(), dispatch.clone());
@@ -44,16 +44,16 @@ pub fn header_component() -> Html {
         <header class="bg-white h-20">
         <nav class="h-full flex justify-between container items-center">
           <div>
-            <Link<Route> to={Route::HomePage} classes="text-ct-dark-600">{"CodevoWeb"}</Link<Route>>
+            <Link<Route> to={Route::Home} classes="text-ct-dark-600">{"CodevoWeb"}</Link<Route>>
           </div>
           <ul class="flex items-center gap-4">
             <li>
-              <Link<Route> to={Route::HomePage} classes="text-ct-dark-600">{"Home"}</Link<Route>>
+              <Link<Route> to={Route::Home} classes="text-ct-dark-600">{"Home"}</Link<Route>>
             </li>
             if user.is_some() {
                <>
                 <li>
-                  <Link<Route> to={Route::ProfilePage} classes="text-ct-dark-600">{"Profile"}</Link<Route>>
+                  <Link<Route> to={Route::Profile} classes="text-ct-dark-600">{"Profile"}</Link<Route>>
                 </li>
                 <li
                   class="cursor-pointer"
@@ -68,10 +68,10 @@ pub fn header_component() -> Html {
             } else {
               <>
                 <li>
-                  <Link<Route> to={Route::RegisterPage} classes="text-ct-dark-600">{"SignUp"}</Link<Route>>
+                  <Link<Route> to={Route::Register} classes="text-ct-dark-600">{"SignUp"}</Link<Route>>
                 </li>
                 <li>
-                  <Link<Route> to={Route::LoginPage} classes="text-ct-dark-600">{"Login"}</Link<Route>>
+                  <Link<Route> to={Route::Login} classes="text-ct-dark-600">{"Login"}</Link<Route>>
                 </li>
               </>
             }

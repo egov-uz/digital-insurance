@@ -44,7 +44,7 @@ fn get_input_callback(
 #[function_component(LoginPage)]
 pub fn login_page() -> Html {
     let (store, dispatch) = use_store::<Store>();
-    let form = use_state(|| LoginUserSchema::default());
+    let form = use_state(LoginUserSchema::default);
     let validation_errors = use_state(|| Rc::new(RefCell::new(ValidationErrors::new())));
     let navigator = use_navigator().unwrap();
 
@@ -128,7 +128,7 @@ pub fn login_page() -> Html {
                         match res {
                             Ok(_) => {
                                 set_page_loading(false, dispatch);
-                                navigator.push(&router::Route::ProfilePage);
+                                navigator.push(&router::Route::Profile);
                             }
                             Err(e) => {
                                 set_page_loading(false, dispatch.clone());
@@ -173,7 +173,7 @@ pub fn login_page() -> Html {
             </LoadingButton>
             <span class="block">
               {"Need an account?"} {" "}
-              <Link<Route> to={Route::RegisterPage} classes="text-ct-blue-600">{ "Sign Up Here" }</Link<Route>>
+              <Link<Route> to={Route::Register} classes="text-ct-blue-600">{ "Sign Up Here" }</Link<Route>>
             </span>
           </form>
       </div>
