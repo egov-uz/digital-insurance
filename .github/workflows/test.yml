@@ -27,7 +27,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Build project with Nix
-        run: nix build
+        run: nix flake show --json | jq  '.packages."x86_64-linux"|keys[]' | xargs -I {} nix build .#{}
 
       - name: Run cargo tests
         run: nix develop --command -- cargo test

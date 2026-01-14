@@ -1,12 +1,12 @@
 [package]
-name = "#name#"
-version = "#version#"
+name = "di-conformance"
+version = "0.0.1"
 edition = "2021"
 license = "MIT"
-homepage = "#website#"
-repository = "#repository#"
-description = "#description#"
-authors = ["#author#"]
+homepage = "https://egov.uz"
+repository = "https://github.com/egov-uz/digital-insurance"
+description = "Conformance utility for checking DI suite"
+authors = ["Sokhibjon Orzikulov <sakhib@orzklv.uz>"]
 
 # Dependencies that will included with final binary
 [dependencies]

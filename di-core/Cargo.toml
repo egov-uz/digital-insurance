@@ -6,14 +6,14 @@ members = ["crates/cli", "crates/database", "crates/http", "crates/utils"]
 [workspace.package]
 # Don't remove `name` regardless of warnings
 # Lots of nix things depend on this value alone
-name = "#name#"
-version = "#version#"
+name = "di-core"
+version = "0.0.1"
 edition = "2021"
 license = "MIT OR Apache-2.0"
-description = "#description#"
-homepage = "#website#"
-repository = "#repository#"
-authors = ["#author#"]
+description = "Core service for storing data standardized way"
+homepage = "https://egov.uz"
+repository = "https://github.com/egov-uz/digital-insurance"
+authors = ["Sokhibjon Orzikulov <sakhib@orzklv.uz>"]
 
 # Shared dependencies across crates
 [workspace.dependencies]
