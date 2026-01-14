@@ -3,7 +3,6 @@ title        = "Digital Insurance"
 authors      = ["Sokhibjon Orzikulov <sakhib@orzklv.uz>"]
 src          = "src"
 language     = "en"
-multilingual = false
 
 [output.html]
 preferred-dark-theme = "ayu"

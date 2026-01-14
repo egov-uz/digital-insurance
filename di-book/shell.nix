@@ -3,11 +3,6 @@ pkgs.mkShell {
   inputsFrom = [package];
 
   packages = with pkgs; [
-    nixd
-    statix
-    deadnix
-    alejandra
-
     taplo
   ];
 

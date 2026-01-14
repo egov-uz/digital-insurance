@@ -3,11 +3,6 @@ pkgs.mkShell {
   inputsFrom = [package];
 
   packages = with pkgs; [
-    nixd
-    statix
-    deadnix
-    alejandra
-
     rustfmt
     clippy
     rust-analyzer
@@ -25,7 +20,7 @@ pkgs.mkShell {
 
   shellHook = ''
     # Starts postgres on nix-shell level
-    source ./scripts/init-db.sh
+    # source ./scripts/init-db.sh
     # Starts the server on watch mode
     # source ./scripts/init-service.sh
   '';

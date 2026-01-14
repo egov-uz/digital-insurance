@@ -1,5 +1,20 @@
 {
-  description = "A beginning of an awesome project bootstrapped with github:bleur-org/templates";
+  # oooooooooooo   .oooooo.      .oooooo.   oooooo     oooo    oooooooooo.   ooooo
+  # `888'     `8  d8P'  `Y8b    d8P'  `Y8b   `888.     .8'     `888'   `Y8b  `888'
+  #  888         888           888      888   `888.   .8'       888      888  888
+  #  888oooo8    888           888      888    `888. .8'        888      888  888
+  #  888    "    888     ooooo 888      888     `888.8'         888      888  888
+  #  888       o `88.    .88'  `88b    d88'      `888'          888     d88'  888
+  # o888ooooood8  `Y8bood8P'    `Y8bood8P'        `8'          o888bood8P'   o888o
+  description = "A monstrosity monorepo containing every part of Digital Insurance project";
+
+  # Extra nix configurations to inject to flake scheme
+  # => use if something doesn't work out of box or when despaired...
+  nixConfig = {
+    experimental-features = ["nix-command" "flakes" "pipe-operators"];
+    extra-substituters = ["https://cache.xinux.uz/"];
+    extra-trusted-public-keys = ["cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="];
+  };
 
   inputs = {
     # Stable for keeping thins clean
@@ -46,7 +61,10 @@
 
         # Development environment
         devShells = with projects;
-          {default = merge devShells;}
+          {
+            default = merge devShells;
+            global = import ./shell.nix {inherit pkgs;};
+          }
           // di-book.devShells
           // di-core.devShells
           // di-stimerch.devShells
