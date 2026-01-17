@@ -22,26 +22,26 @@ export PGDATA=$NIX_SHELL_DIR/db
 # be executed when SIGNAL crops up. See `trap --help` for more.
 ####################################################################
 
-trap \
-  "
-    ######################################################
-    # Stop PostgreSQL
-    ######################################################
+# trap \
+#   "
+#     ######################################################
+#     # Stop PostgreSQL
+#     ######################################################
 
-    pg_ctl -D $PGDATA stop
+#     pg_ctl -D $PGDATA stop
 
-    ######################################################
-    # Delete `.nix-shell` directory
-    # ----------------------------------
-    # The first  step is going  back to the  project root,
-    # otherwise `.nix-shell`  won't get deleted.  At least
-    # it didn't for me when exiting in a subdirectory.
-    ######################################################
+#     ######################################################
+#     # Delete `.nix-shell` directory
+#     # ----------------------------------
+#     # The first  step is going  back to the  project root,
+#     # otherwise `.nix-shell`  won't get deleted.  At least
+#     # it didn't for me when exiting in a subdirectory.
+#     ######################################################
 
-    cd $PWD
-    rm -rf "$NIX_SHELL_DIR"
-  " \
-  EXIT
+#     cd $PWD
+#     rm -rf "$NIX_SHELL_DIR"
+#   " \
+#   EXIT
 
 ####################################################################
 # If database is  not initialized (i.e., $PGDATA  directory does not

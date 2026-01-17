@@ -1,35 +1,47 @@
-use crate::{schema::posts, DbError};
+use crate::{schema::users, DbError};
+use chrono::prelude::*;
 use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Selectable, Serialize, Deserialize, Debug, Clone)]
-#[diesel(table_name = posts)]
+#[diesel(table_name = users)]
 #[diesel(check_for_backend(diesel::pg::Pg))]
-pub struct Post {
-    pub id: i32,
-    pub title: String,
-    pub body: String,
-    pub published: bool,
+pub struct User {
+    pub id: uuid::Uuid,
+    pub username: String,
+    pub email: String,
+    pub password: String,
+    pub role: String,
+    pub verified: bool,
+    #[serde(rename = "createdAt")]
+    pub created_at: Option<DateTime<Utc>>,
+    #[serde(rename = "updatedAt")]
+    pub updated_at: Option<DateTime<Utc>>,
 }
 
-#[derive(Insertable, Serialize, Deserialize, Debug, Clone)]
-#[diesel(table_name = posts)]
-pub struct NewPost {
-    pub title: String,
-    pub body: String,
+#[derive(Debug, Serialize, Deserialize)]
+pub struct TokenClaims {
+    pub sub: String,
+    pub iat: usize,
+    pub exp: usize,
 }
 
-#[derive(AsChangeset, Serialize, Deserialize, Debug, Clone)]
-#[diesel(table_name = posts)]
-pub struct UpdatePost {
-    pub title: String,
-    pub body: String,
-    pub published: bool,
+#[derive(Debug, Deserialize)]
+pub struct RegisterUserSchema {
+    pub name: String,
+    pub email: String,
+    pub password: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct LoginUserSchema {
+    pub email: String,
+    pub password: String,
 }
 
 /// Run query using Diesel to find post by uid and return it.
 pub fn get_all_posts(conn: &mut PgConnection) -> Result<Vec<Post>, DbError> {
-    use crate::schema::posts::dsl::*;
+    use crate::schema::users::dsl::*;
 
     // let posts = posts.filter(id.eq(uid)).first::<Post>(conn).optional()?;
     let all_posts = posts.select(Post::as_select()).limit(20).load(conn)?;

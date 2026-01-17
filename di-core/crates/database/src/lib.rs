@@ -1,5 +1,5 @@
-pub mod posts;
 pub mod schema;
+pub mod users;
 
 use diesel::prelude::*;
 use dotenvy::dotenv;
