@@ -14,7 +14,7 @@ This is proposed Digital Insuranced project which aims to demnstrate what the fi
 
 ## Development
 
-The project is a huge monorepo which consists of various components and each component has `shell.nix` which has development environment preconfigured already. Monorepo merges every development environment and creates one big dev space. Just open your terminal and at the root of this project:
+The project is a huge monorepo of monorepos (let's say megarepo) which consists of various components and each component has `shell.nix` which has development environment preconfigured already. Monorepo of monorepos merges every development environment and creates one big dev space. Just open your terminal and at the root of this project:
 
 ```bash
 # Open in bash by default

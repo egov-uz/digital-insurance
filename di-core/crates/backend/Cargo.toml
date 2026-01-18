@@ -1,5 +1,5 @@
 [package]
-name = "http"
+name = "backend"
 authors.workspace = true
 edition.workspace = true
 version.workspace = true
@@ -9,8 +9,17 @@ repository.workspace = true
 
 [dependencies]
 # Relative Dependencies
-utils = { path = "../utils" }
+utilities = { path = "../utilities" }
 database = { path = "../database" }
 
+# Third Party Dependencies
+# # Workspace
 actix-web = { workspace = true }
-env_logger = "0.11.6"
+uuid = { workspace = true }
+serde = { workspace = true }
+chrono = { workspace = true }
+jsonwebtoken = { workspace = true }
+
+# # Induvidual
+env_logger = "0.11"
+serde_json = "1"

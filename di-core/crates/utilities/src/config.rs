@@ -3,13 +3,17 @@ use get_fields::GetFields;
 use serde::{Deserialize, Serialize};
 use std::{net::ToSocketAddrs, path::PathBuf};
 
-#[derive(Debug, Serialize, Deserialize, GetFields)]
+#[derive(Debug, Serialize, Deserialize, GetFields, Clone)]
 #[get_fields(rename_all = "SCREAMING_SNAKE_CASE")]
 pub struct Config {
     pub url: String,
     pub port: u16,
     pub database_url: String,
     pub threads: u16,
+
+    pub jwt_secret: String,
+    pub jwt_expires: String,
+    pub jwt_maxage: u32,
 }
 
 pub struct Builder {
@@ -30,7 +34,11 @@ impl Default for Config {
             threads: 1,
             port: 8001,
             url: "127.0.0.1".to_string(),
-            database_url: String::new(),
+            database_url: Default::default(),
+
+            jwt_secret: "some_default_jwt_secret".to_string(),
+            jwt_expires: "60m".to_string(),
+            jwt_maxage: 60,
         }
     }
 }
@@ -79,7 +87,7 @@ impl Config {
 
         let result = match std::fs::read_to_string(path) {
             Ok(d) => d,
-            Err(e) => return Err(Error::Read(e)),
+            Err(e) => return Err(Error::IO(e)),
         };
 
         Ok(result)
@@ -92,14 +100,14 @@ impl Config {
         }
 
         let output = toml::to_string_pretty(self).map_err(Error::Serialization)?;
-        std::fs::write(&path, output).map_err(Error::Write)?;
+        std::fs::write(&path, output).map_err(Error::IO)?;
 
         Ok(())
     }
 
     /// Read a file at given path, parse and set values to current instance
     pub fn import(&mut self, path: PathBuf) -> Result<()> {
-        let file = std::fs::read_to_string(&path).map_err(Error::Read)?;
+        let file = std::fs::read_to_string(&path).map_err(Error::IO)?;
         let new: Config = toml::from_str(&file).map_err(Error::Deserialization)?;
 
         *self = new;
@@ -119,7 +127,7 @@ impl Config {
     pub fn socket_addr(&self) -> Result<String> {
         let addr: String = (self.url.clone(), self.port)
             .to_socket_addrs()
-            .map_err(Error::SocketParse)?
+            .map_err(Error::IO)?
             .map(|p| p.to_string())
             .collect::<String>();
 

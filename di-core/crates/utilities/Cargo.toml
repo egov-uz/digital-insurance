@@ -1,5 +1,5 @@
 [package]
-name = "utils"
+name = "utilities"
 authors.workspace = true
 edition.workspace = true
 version.workspace = true
@@ -8,10 +8,18 @@ homepage.workspace = true
 repository.workspace = true
 
 [dependencies]
+# # Workspsace
 dotenvy = { workspace = true }
 toml = { workspace = true }
-get_fields = "0.1.0"
 serde = { workspace = true }
+diesel = { workspace = true }
+r2d2 = { workspace = true }
+argon2 = { workspace = true }
+jsonwebtoken = { workspace = true }
+
+# # Induvidual
+get_fields = "0.1.0"
 syn = { version = "2.0", features = ["derive", "full"] }
 quote = "1.0"
 proc-macro2 = "1.0"
+thiserror = "2"

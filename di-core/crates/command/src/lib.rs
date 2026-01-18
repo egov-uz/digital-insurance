@@ -1,7 +1,7 @@
 use clap::{Args, Parser, Subcommand};
 use std::path::PathBuf;
 
-pub use utils::error::{Error, Result};
+pub use utilities::error::{Error, Result};
 
 /// CLI interface for server infrastructure
 #[derive(Debug, Parser)]

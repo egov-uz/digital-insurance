@@ -1,5 +1,5 @@
 [package]
-name = "cli"
+name = "command"
 authors.workspace = true
 edition.workspace = true
 version.workspace = true
@@ -13,13 +13,16 @@ path = "src/main.rs"
 
 [dependencies]
 # Relative Dependencies
-http = { path = "../http" }
-utils = { path = "../utils" }
+backend = { path = "../backend" }
+utilities = { path = "../utilities" }
 
 # Third party dependencies
-clap = { version = "4.5.28", features = ["derive"] }
+# # Workspsace
 actix-web = { workspace = true }
 serde = { workspace = true }
 tokio = { workspace = true }
 dotenvy = { workspace = true }
 toml = { workspace = true }
+
+# # Induvidual
+clap = { version = "4.5.28", features = ["derive"] }

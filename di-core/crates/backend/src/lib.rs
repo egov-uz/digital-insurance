@@ -1,8 +1,18 @@
-use actix_web::{web, App, HttpServer};
-use database::{r2d2, PgConnection};
-use utils::config::Config;
-
+mod jwt;
+mod response;
 mod routes;
+
+use actix_web::{web, App, HttpServer};
+use database::{
+    r2d2::{self, ConnectionManager, Pool},
+    PgConnection,
+};
+use utilities::config::Config;
+
+pub struct AppState {
+    config: Config,
+    db: Pool<ConnectionManager<PgConnection>>,
+}
 
 pub async fn server(config: Config) -> std::io::Result<()> {
     // Logger setup
@@ -13,15 +23,16 @@ pub async fn server(config: Config) -> std::io::Result<()> {
         .build(manager)
         .expect("seems like something is wrong with database_url coming from config!");
 
+    let conf_state = config.clone();
+
     HttpServer::new(move || {
         App::new()
-            .app_data(web::Data::new(pool.clone()))
+            .app_data(web::Data::new(AppState {
+                db: pool.clone(),
+                config: conf_state.clone(),
+            }))
             .service(routes::index)
-            .service(routes::posts::all_posts)
-            .service(routes::posts::get_post)
-            .service(routes::posts::new_post)
-            .service(routes::posts::edit_post)
-            .service(routes::posts::remove_post)
+            .service(routes::users::user_register)
     })
     .workers(config.threads as usize)
     .bind(config.socket_addr().unwrap_or("127.0.0.1:8000".to_string()))?

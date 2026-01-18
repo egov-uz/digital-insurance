@@ -3,8 +3,8 @@
 use std::process::exit;
 
 use clap::Parser;
-use cli::{Cli, Commands, ConfigCommands, ServerCommands};
-use utils::config::{Config, Field};
+use command::{Cli, Commands, ConfigCommands, ServerCommands};
+use utilities::config::{Config, Field};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

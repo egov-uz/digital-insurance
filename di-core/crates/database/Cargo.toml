@@ -8,9 +8,18 @@ homepage.workspace = true
 repository.workspace = true
 
 [dependencies]
-diesel = { version = "2.2.0", features = ["postgres", "uuid", "r2d2"] }
-dotenvy = "0.15"
-r2d2 = "0.8.10"
-uuid = { version = "1.13", features = ["v4", "v7", "serde"] }
+# Relative Dependencies
+utilities = { path = "../utilities" }
+
+# Third Party Dependencies
+# # Workspsace
 serde = { workspace = true }
-chrono = { version = "0.4.43", features = ["serde"] }
+diesel = { workspace = true }
+r2d2 = { workspace = true }
+uuid = { workspace = true }
+argon2 = { workspace = true }
+chrono = { workspace = true }
+
+# # Induvidual
+dotenvy = "0.15"
+rand_core = {version = "0.9.5", features = ["std"]}

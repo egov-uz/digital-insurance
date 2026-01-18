@@ -1,11 +1,9 @@
 [workspace]
 resolver = "2"
-default-members = ["crates/cli"]
-members = ["crates/cli", "crates/database", "crates/http", "crates/utils"]
+default-members = ["crates/command"]
+members = ["crates/command", "crates/database", "crates/backend", "crates/utilities"]
 
 [workspace.package]
-# Don't remove `name` regardless of warnings
-# Lots of nix things depend on this value alone
 name = "di-core"
 version = "0.0.1"
 edition = "2021"
@@ -22,6 +20,12 @@ tokio = { version = "1.38.0", features = ["macros", "rt-multi-thread"] }
 actix-web = "4"
 dotenvy = "0.15.7"
 toml = { version = "0.8.20", features = ["display"] }
+diesel = { version = "2.2.0", features = ["postgres", "uuid", "r2d2", "chrono"] }
+r2d2 = "0.8.10"
+uuid = { version = "1.13", features = ["v4", "v7", "serde"] }
+argon2 = "0.5.3"
+chrono = { version = "0.4.43", features = ["serde"] }
+jsonwebtoken = {version = "10.2.0", features = ["rust_crypto"]}
 
 # Optimize release binary as much as possible
 [profile.release]
